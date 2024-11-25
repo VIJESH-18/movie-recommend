@@ -1,0 +1,70 @@
+class MovieRecommendationSystem:
+    def __init__(self):
+        self.movies = {
+            "Action": ["Mad Max: Fury Road", "Die Hard", "John Wick"],
+            "Comedy": ["The Hangover", "Superbad", "Step Brothers"],
+            "Drama": ["The Shawshank Redemption", "Forrest Gump", "The Godfather"],
+            "Horror": ["The Conjuring", "Get Out", "A Quiet Place"],
+            "Sci-Fi": ["Inception", "Interstellar", "The Matrix"],
+        }
+
+    def display_genres(self):
+        print("\nAvailable Genres:")
+        for genre in self.movies:
+            print(f"- {genre}")
+
+    def recommend_movies(self, genre):
+        if genre in self.movies:
+            print(f"\nRecommended Movies for {genre}:")
+            for movie in self.movies[genre]:
+                print(f"- {movie}")
+        else:
+            print("\nGenre not found. Please try again.")
+
+    def add_movie(self, genre, movie_name):
+        if genre in self.movies:
+            self.movies[genre].append(movie_name)
+            print(f"\n'{movie_name}' has been added to the {genre} genre.")
+        else:
+            self.movies[genre] = [movie_name]
+            print(f"\nNew genre '{genre}' created and '{movie_name}' has been added.")
+
+    def remove_movie(self, genre, movie_name):
+        if genre in self.movies and movie_name in self.movies[genre]:
+            self.movies[genre].remove(movie_name)
+            print(f"\n'{movie_name}' has been removed from the {genre} genre.")
+        else:
+            print("\nMovie or genre not found.")
+
+    def main_menu(self):
+        while True:
+            print("\nMovie Recommendation System")
+            print("1. Display Genres")
+            print("2. Get Recommendations")
+            print("3. Add a Movie")
+            print("4. Remove a Movie")
+            print("5. Exit")
+            choice = input("Enter your choice: ").strip()
+
+            if choice == "1":
+                self.display_genres()
+            elif choice == "2":
+                genre = input("Enter genre: ").strip()
+                self.recommend_movies(genre)
+            elif choice == "3":
+                genre = input("Enter genre: ").strip()
+                movie_name = input("Enter movie name: ").strip()
+                self.add_movie(genre, movie_name)
+            elif choice == "4":
+                genre = input("Enter genre: ").strip()
+                movie_name = input("Enter movie name: ").strip()
+                self.remove_movie(genre, movie_name)
+            elif choice == "5":
+                print("Exiting the system. Goodbye!")
+                break
+            else:
+                print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    system = MovieRecommendationSystem()
+    system.main_menu()
